@@ -1,10 +1,57 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Objective
+Resource: [React Hook Doc](https://reactjs.org/docs/hooks-reference.html)  
+The objective of this project is to better get familiarized with using various React hook features including
 
-## Available Scripts
+### Basic Hooks
+1. **useState**:  
+    Returns a stateful value and a function to update it 
+    ``` 
+    const [state, setState] = useState(initalState)
+    ```
+    <span style="color:#add8e6">setState</span> function identity is stable and won't change on re-renders (you can omit from *useEffect* and *useCallback* dependency list)  
 
-In the project directory, you can run:
+    You can update state by passing a function to setState. The function will recieve the previous value and return an updated value. 
+    ```
+    <button onClick={()=>setCount(prevCount => prevCount + 1)}>+</button>
+    ```  
+    <span style="color:#add8e6">setState</span> doesn't automatically merge updated objects.  
+
+    You can replicate this behavior by combining the function updater with an object spread syntax or through the use of <span style="color:#add8e6">useReducer</span>
+    ```
+    const [state, setState] = useState([])
+    setState(prevState => {
+      //alternatively you can use Object.assign
+      return {...prevState, ...updatedValues}
+    })
+    ```  
+    _**Lazy Initial State**_   
+    State used during inital render can be assigned by passing in an **initialState**  
+    If initial state is a result of an expensive calculation, you can provide a function which will only be executed during inital render
+    ```
+    const [state, setState] = useState(() => {
+      const initalState = someExpensiveComputation(props)
+      return initalState
+    })
+    ```  
+    _**Bailing out of State Update**_   
+    If State hook is updated with the same value, React will bail without rendering the children or firing effects. 
+
+
+
+2. **useEffect**:  
+    All is good
+3. **useContext**:  
+
+### Additional Hooks
+4. **useReducer**  
+5. **useCallback**  
+6. **useMemo**  
+7. **useRef**  
+8. **useImperativeHandle**  
+9. **useLayoutEffect**  
+10. **useDebugValue**   
+
 
 ### `yarn start`
 
@@ -12,59 +59,5 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const initalCount = 0;
+	const [counter, setCounter] = useState(initalCount);
+	const [year, setYear] = useState(() => {
+		const initalYear = new Date().getFullYear();
+		return initalYear;
+	});
+
+	return (
+		<div className="App">
+			<div>{counter}</div>
+			<div>{year}</div>
+
+			<div>
+				<button onClick={() => setCounter(initalCount)}>Reset</button>
+				<button onClick={() => setCounter((prev) => prev + 1)}>+</button>
+				<button onClick={() => setCounter((prev) => prev - 1)}>+</button>
+			</div>
+		</div>
+	);
 }
 
 export default App;
