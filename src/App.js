@@ -1,24 +1,24 @@
 import "./App.css";
 import { useState } from "react";
+import {Counter, Timer, UserForm} from "./Components"
 
 function App() {
 	const initalCount = 0;
-	const [counter, setCounter] = useState(initalCount);
-	const [year, setYear] = useState(() => {
-		const initalYear = new Date().getFullYear();
-		return initalYear;
-	});
+	const initalUser = {
+		name: "Khuong",
+		profession: "Software Dev",
+	};
+	
+	const [user, setUser] = useState(initalUser)
 
 	return (
 		<div className="App">
-			<div>{counter}</div>
-			<div>{year}</div>
-
-			<div>
-				<button onClick={() => setCounter(initalCount)}>Reset</button>
-				<button onClick={() => setCounter((prev) => prev + 1)}>+</button>
-				<button onClick={() => setCounter((prev) => prev - 1)}>+</button>
-			</div>
+			<Timer />
+			<div>Name:{user.name}</div>
+			<div>Profession:{user.profession}</div>
+			
+			<Counter initalCount={initalCount} />
+			<UserForm setUser={setUser}/>
 		</div>
 	);
 }
